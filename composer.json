@@ -1,0 +1,14 @@
+{
+  "name": "javier/php-kata-tdd-start",
+  "description": "Minimal Mars Rover kata starting point for TDD",
+  "type": "project",
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}

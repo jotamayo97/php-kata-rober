@@ -1,0 +1,13 @@
+# Dependencies
+/vendor/
+
+# PHPUnit cache/output
+/.phpunit.result.cache
+/.phpunit.cache/
+/coverage/
+
+# IDE / OS local files
+/.idea/
+*.iml
+.DS_Store
+Thumbs.db
