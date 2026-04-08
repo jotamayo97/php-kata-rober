@@ -14,11 +14,7 @@ final class Rober
                 $this->rotateRight();
             }
             else if($rotation == 'L'){
-                if($this->direction == 'N'){
-                    $this->direction = 'W';
-                }else if($this->direction == 'W'){
-                    $this->direction = 'S';
-                }
+                $this->rotateLeft();
             }
         }
 
@@ -37,6 +33,22 @@ final class Rober
         } else if ($this->direction == 'S') {
             $this->direction = 'W';
         } else if ($this->direction == 'W') {
+            $this->direction = 'N';
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function rotateLeft(): void
+    {
+        if ($this->direction == 'N') {
+            $this->direction = 'W';
+        } else if ($this->direction == 'W') {
+            $this->direction = 'S';
+        } else if ($this->direction == 'S') {
+            $this->direction = 'E';
+        } else if ($this->direction == 'E') {
             $this->direction = 'N';
         }
     }
