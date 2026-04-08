@@ -15,15 +15,7 @@ final class Rober
     {
         foreach (str_split($commands) as $command) {
             if ($command == 'M') {
-                if ($this->direction == 'N') {
-                    $this->y = ($this->y + 1) % self::MAX_MOVEMENT;
-                }else if ($this->direction == 'E') {
-                    $this->x = ($this->x + 1) % self::MAX_MOVEMENT;
-                }else if ($this->direction == 'S') {
-                    $this->y = ($this->y > 0) ? $this->y - 1 : self::MAX_MOVEMENT - 1;
-                }else if ($this->direction == 'W') {
-                    $this->x = ($this->x > 0) ? $this->x - 1 : self::MAX_MOVEMENT - 1;
-                }
+                $this->Move();
             }
             if ($command == 'R') {
                 $this->rotateRight();
@@ -58,6 +50,22 @@ final class Rober
             $this->direction = 'E';
         } else if ($this->direction == 'E') {
             $this->direction = 'N';
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function Move(): void
+    {
+        if ($this->direction == 'N') {
+            $this->y = ($this->y + 1) % self::MAX_MOVEMENT;
+        } else if ($this->direction == 'E') {
+            $this->x = ($this->x + 1) % self::MAX_MOVEMENT;
+        } else if ($this->direction == 'S') {
+            $this->y = ($this->y > 0) ? $this->y - 1 : self::MAX_MOVEMENT - 1;
+        } else if ($this->direction == 'W') {
+            $this->x = ($this->x > 0) ? $this->x - 1 : self::MAX_MOVEMENT - 1;
         }
     }
 }
