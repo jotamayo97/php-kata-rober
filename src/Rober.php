@@ -11,22 +11,33 @@ final class Rober
     {
         foreach (str_split($rotations) as $rotation) {
             if($rotation == 'R'){
+                $this->rotateRight();
+            }
+            else if($rotation == 'L'){
                 if($this->direction == 'N'){
-                    $this->direction = 'E';
-                }
-                else if($this->direction == 'E') {
-                    $this->direction = 'S';
-                }else if($this->direction == 'S'){
                     $this->direction = 'W';
                 }else if($this->direction == 'W'){
-                    $this->direction = 'N';
+                    $this->direction = 'S';
                 }
-            }
-            else if($rotations == 'L'){
-                return '0:0:W';
             }
         }
 
         return '0:0:' . $this->direction;
+    }
+
+    /**
+     * @return void
+     */
+    public function rotateRight(): void
+    {
+        if ($this->direction == 'N') {
+            $this->direction = 'E';
+        } else if ($this->direction == 'E') {
+            $this->direction = 'S';
+        } else if ($this->direction == 'S') {
+            $this->direction = 'W';
+        } else if ($this->direction == 'W') {
+            $this->direction = 'N';
+        }
     }
 }
