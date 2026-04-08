@@ -13,6 +13,7 @@ final class Rober
     private string $direction = self::NORTH;
     private int $x = 0;
     private int $y = 0;
+    private bool $foundObstacle = false;
     private Grid $grid;
 
     public function __construct(?Grid $grid = null)
@@ -24,7 +25,10 @@ final class Rober
     {
         foreach (str_split($command) as $singleCommand) {
             if ($singleCommand == 'M') {
-                $this->Move();
+                $this->move();
+                if ($this->foundObstacle) {
+                    break;
+                }
             }
             if ($singleCommand == 'R') {
                 $this->rotateRight();
@@ -33,10 +37,11 @@ final class Rober
             }
         }
 
-        return $this->x . ':' . $this->y . ':' . $this->direction;
+        $prefix = $this->foundObstacle ? 'O:' : '';
+        return $prefix . $this->x . ':' . $this->y . ':' . $this->direction;
     }
 
-    public function rotateRight(): void
+    private function rotateRight(): void
     {
         if ($this->direction == self::NORTH) {
             $this->direction = self::EAST;
@@ -49,7 +54,7 @@ final class Rober
         }
     }
 
-    public function rotateLeft(): void
+    private function rotateLeft(): void
     {
         if ($this->direction == self::NORTH) {
             $this->direction = self::WEST;
@@ -65,16 +70,27 @@ final class Rober
     /**
      * @return void
      */
-    public function Move(): void
+    private function move(): void
     {
+        $nextX = $this->x;
+        $nextY = $this->y;
+
         if ($this->direction == self::NORTH) {
-            $this->y = ($this->y + 1) % $this->grid->height();
+            $nextY = ($this->y + 1) % $this->grid->height();
         } else if ($this->direction == self::EAST) {
-            $this->x = ($this->x + 1) % $this->grid->width();
+            $nextX = ($this->x + 1) % $this->grid->width();
         } else if ($this->direction == self::SOUTH) {
-            $this->y = ($this->y > 0) ? $this->y - 1 : $this->grid->height() - 1;
+            $nextY = ($this->y > 0) ? $this->y - 1 : $this->grid->height() - 1;
         } else if ($this->direction == self::WEST) {
-            $this->x = ($this->x > 0) ? $this->x - 1 : $this->grid->width() - 1;
+            $nextX = ($this->x > 0) ? $this->x - 1 : $this->grid->width() - 1;
         }
+
+        if ($this->grid->hasObstacle($nextX, $nextY)) {
+            $this->foundObstacle = true;
+            return;
+        }
+
+        $this->x = $nextX;
+        $this->y = $nextY;
     }
 }

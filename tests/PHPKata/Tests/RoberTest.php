@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPKata\Tests;
 
+use PHPKata\Grid;
 use PHPKata\Rober;
 use PHPUnit\Framework\TestCase;
 
@@ -117,6 +118,15 @@ final class RoberTest extends TestCase
     {
         $rover = new Rober();
         self::assertSame('0:0:S', $rover->execute('LLMMMMMMMMMM'));
+    }
+
+    public function testStopWithObstacle(): void
+    {
+        $obstacle = [0, 3];
+        $grid = new Grid(10, 10, [$obstacle]);
+        $rover = new Rober($grid);
+
+        self::assertSame('O:0:2:N', $rover->execute('MMMM'));
     }
 
 }

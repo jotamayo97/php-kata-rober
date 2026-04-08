@@ -9,6 +9,7 @@ final class Grid
     public function __construct(
         private int $width,
         private int $height,
+        private array $obstacles = [],
     ) {
     }
 
@@ -20,5 +21,16 @@ final class Grid
     public function height(): int
     {
         return $this->height;
+    }
+
+    public function hasObstacle(int $x, int $y): bool
+    {
+        foreach ($this->obstacles as $obstacle) {
+            if ($obstacle[0] == $x && $obstacle[1] == $y) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
