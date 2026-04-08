@@ -24,5 +24,11 @@ final class RoberTest extends TestCase
         self::assertSame('0:0:E', $rover->execute('R'));
     }
 
+    public function testRotateLeft(): void
+    {
+        $rover = new Rober();
+
+        self::assertSame('0:0:W', $rover->execute('L'));
+    }
 
 }
