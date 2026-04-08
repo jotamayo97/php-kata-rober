@@ -17,6 +17,8 @@ final class Rober
             if ($command == 'M') {
                 if ($this->direction == 'N') {
                     $this->y = ($this->y + 1) % $this->MAX_MOVEMENT;
+                }else if ($this->direction == 'E') {
+                    $this->x = ($this->x + 1) % $this->MAX_MOVEMENT;
                 }
             }
             if ($command == 'R') {
@@ -29,9 +31,6 @@ final class Rober
         return $this->x . ':' . $this->y . ':' . $this->direction;
     }
 
-    /**
-     * @return void
-     */
     public function rotateRight(): void
     {
         if ($this->direction == 'N') {
@@ -45,9 +44,6 @@ final class Rober
         }
     }
 
-    /**
-     * @return void
-     */
     public function rotateLeft(): void
     {
         if ($this->direction == 'N') {
