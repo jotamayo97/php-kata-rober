@@ -6,8 +6,12 @@ namespace PHPKata;
 
 final class Rober
 {
+    private const NORTH = 'N';
+    private const SOUTH = 'S';
+    private const EAST = 'E';
+    private const WEST = 'W';
     private const MAX_MOVEMENT = 10;
-    private string $direction = 'N';
+    private string $direction = self::NORTH;
     private int $x = 0;
     private int $y = 0;
 
@@ -29,27 +33,27 @@ final class Rober
 
     public function rotateRight(): void
     {
-        if ($this->direction == 'N') {
-            $this->direction = 'E';
-        } else if ($this->direction == 'E') {
-            $this->direction = 'S';
-        } else if ($this->direction == 'S') {
-            $this->direction = 'W';
-        } else if ($this->direction == 'W') {
-            $this->direction = 'N';
+        if ($this->direction == self::NORTH) {
+            $this->direction = self::EAST;
+        } else if ($this->direction == self::EAST) {
+            $this->direction = self::SOUTH;
+        } else if ($this->direction == self::SOUTH) {
+            $this->direction = self::WEST;
+        } else if ($this->direction == self::WEST) {
+            $this->direction = self::NORTH;
         }
     }
 
     public function rotateLeft(): void
     {
-        if ($this->direction == 'N') {
-            $this->direction = 'W';
-        } else if ($this->direction == 'W') {
-            $this->direction = 'S';
-        } else if ($this->direction == 'S') {
-            $this->direction = 'E';
-        } else if ($this->direction == 'E') {
-            $this->direction = 'N';
+        if ($this->direction == self::NORTH) {
+            $this->direction = self::WEST;
+        } else if ($this->direction == self::WEST) {
+            $this->direction = self::SOUTH;
+        } else if ($this->direction == self::SOUTH) {
+            $this->direction = self::EAST;
+        } else if ($this->direction == self::EAST) {
+            $this->direction = self::NORTH;
         }
     }
 
@@ -58,13 +62,13 @@ final class Rober
      */
     public function Move(): void
     {
-        if ($this->direction == 'N') {
+        if ($this->direction == self::NORTH) {
             $this->y = ($this->y + 1) % self::MAX_MOVEMENT;
-        } else if ($this->direction == 'E') {
+        } else if ($this->direction == self::EAST) {
             $this->x = ($this->x + 1) % self::MAX_MOVEMENT;
-        } else if ($this->direction == 'S') {
+        } else if ($this->direction == self::SOUTH) {
             $this->y = ($this->y > 0) ? $this->y - 1 : self::MAX_MOVEMENT - 1;
-        } else if ($this->direction == 'W') {
+        } else if ($this->direction == self::WEST) {
             $this->x = ($this->x > 0) ? $this->x - 1 : self::MAX_MOVEMENT - 1;
         }
     }
