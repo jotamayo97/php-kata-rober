@@ -6,14 +6,23 @@ namespace PHPKata;
 
 final class Rober
 {
-    public function execute(string $rotation): string
+    private string $direction = 'N';
+    public function execute(string $rotations): string
     {
-        if($rotation == 'R'){
-            return '0:0:E';
+        foreach (str_split($rotations) as $rotation) {
+            if($rotation == 'R'){
+                if($this->direction == 'N'){
+                    $this->direction = 'E';
+                }
+                else if($this->direction == 'E'){
+                    $this->direction = 'S';
+                }
+            }
+            else if($rotations == 'L'){
+                return '0:0:W';
+            }
         }
-        else if($rotation == 'L'){
-            return '0:0:W';
-        }
-        return '0:0:N';
+
+        return '0:0:' . $this->direction;
     }
 }
