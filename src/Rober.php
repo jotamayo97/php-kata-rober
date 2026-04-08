@@ -7,18 +7,25 @@ namespace PHPKata;
 final class Rober
 {
     private string $direction = 'N';
-    public function execute(string $rotations): string
+    private int $x = 0;
+    private int $y = 0;
+    public function execute(string $commands): string
     {
-        foreach (str_split($rotations) as $rotation) {
-            if($rotation == 'R'){
+        foreach (str_split($commands) as $command) {
+            if($command == 'M'){
+                if($this->direction == 'N'){
+                    $this->y++;
+                }
+            }
+            if($command == 'R'){
                 $this->rotateRight();
             }
-            else if($rotation == 'L'){
+            else if($command == 'L'){
                 $this->rotateLeft();
             }
         }
 
-        return '0:0:' . $this->direction;
+        return $this->x . ':'. $this->y.':' . $this->direction;
     }
 
     /**

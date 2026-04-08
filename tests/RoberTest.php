@@ -68,4 +68,9 @@ final class RoberTest extends TestCase
         self::assertSame('0:0:N', $rover->execute('LLLL'));
     }
 
+    public function testMoveForward(): void{
+        $rover = new Rober();
+        self::assertSame('0:1:N', $rover->execute('M'));
+    }
+
 }
