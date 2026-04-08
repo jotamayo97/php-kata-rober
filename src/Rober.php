@@ -6,7 +6,7 @@ namespace PHPKata;
 
 final class Rober
 {
-    private int $MAX_MOVEMENT = 10;
+    private const MAX_MOVEMENT = 10;
     private string $direction = 'N';
     private int $x = 0;
     private int $y = 0;
@@ -16,9 +16,13 @@ final class Rober
         foreach (str_split($commands) as $command) {
             if ($command == 'M') {
                 if ($this->direction == 'N') {
-                    $this->y = ($this->y + 1) % $this->MAX_MOVEMENT;
+                    $this->y = ($this->y + 1) % self::MAX_MOVEMENT;
                 }else if ($this->direction == 'E') {
-                    $this->x = ($this->x + 1) % $this->MAX_MOVEMENT;
+                    $this->x = ($this->x + 1) % self::MAX_MOVEMENT;
+                }else if ($this->direction == 'S') {
+                    $this->y = ($this->y > 0) ? $this->y - 1 : self::MAX_MOVEMENT - 1;
+                }else if ($this->direction == 'W') {
+                    $this->x = ($this->x > 0) ? $this->x - 1 : self::MAX_MOVEMENT - 1;
                 }
             }
             if ($command == 'R') {
