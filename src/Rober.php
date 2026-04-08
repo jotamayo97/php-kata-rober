@@ -10,20 +10,25 @@ final class Rober
     private const SOUTH = 'S';
     private const EAST = 'E';
     private const WEST = 'W';
-    private const MAX_MOVEMENT = 10;
     private string $direction = self::NORTH;
     private int $x = 0;
     private int $y = 0;
+    private Grid $grid;
 
-    public function execute(string $commands): string
+    public function __construct(?Grid $grid = null)
     {
-        foreach (str_split($commands) as $command) {
-            if ($command == 'M') {
+        $this->grid = $grid ?? new Grid(10, 10);
+    }
+
+    public function execute(string $command): string
+    {
+        foreach (str_split($command) as $singleCommand) {
+            if ($singleCommand == 'M') {
                 $this->Move();
             }
-            if ($command == 'R') {
+            if ($singleCommand == 'R') {
                 $this->rotateRight();
-            } else if ($command == 'L') {
+            } else if ($singleCommand == 'L') {
                 $this->rotateLeft();
             }
         }
@@ -63,13 +68,13 @@ final class Rober
     public function Move(): void
     {
         if ($this->direction == self::NORTH) {
-            $this->y = ($this->y + 1) % self::MAX_MOVEMENT;
+            $this->y = ($this->y + 1) % $this->grid->height();
         } else if ($this->direction == self::EAST) {
-            $this->x = ($this->x + 1) % self::MAX_MOVEMENT;
+            $this->x = ($this->x + 1) % $this->grid->width();
         } else if ($this->direction == self::SOUTH) {
-            $this->y = ($this->y > 0) ? $this->y - 1 : self::MAX_MOVEMENT - 1;
+            $this->y = ($this->y > 0) ? $this->y - 1 : $this->grid->height() - 1;
         } else if ($this->direction == self::WEST) {
-            $this->x = ($this->x > 0) ? $this->x - 1 : self::MAX_MOVEMENT - 1;
+            $this->x = ($this->x > 0) ? $this->x - 1 : $this->grid->width() - 1;
         }
     }
 }
