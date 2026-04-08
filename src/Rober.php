@@ -10,23 +10,23 @@ final class Rober
     private string $direction = 'N';
     private int $x = 0;
     private int $y = 0;
+
     public function execute(string $commands): string
     {
         foreach (str_split($commands) as $command) {
-            if($command == 'M'){
-                if($this->direction == 'N'){
+            if ($command == 'M') {
+                if ($this->direction == 'N') {
                     $this->y = ($this->y + 1) % $this->MAX_MOVEMENT;
                 }
             }
-            if($command == 'R'){
+            if ($command == 'R') {
                 $this->rotateRight();
-            }
-            else if($command == 'L'){
+            } else if ($command == 'L') {
                 $this->rotateLeft();
             }
         }
 
-        return $this->x . ':'. $this->y.':' . $this->direction;
+        return $this->x . ':' . $this->y . ':' . $this->direction;
     }
 
     /**
